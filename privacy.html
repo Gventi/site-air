@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Ingest Air</title>
+<meta name="description" content="Ingest Air collects no data. It has no network access at all, and all processing happens on your device.">
+<link rel="icon" href="assets/icon.png">
+<link rel="canonical" href="https://ingestair.space/privacy.html">
+<style>
+:root {
+  --bg: #06121a; --bg-raised: #0d1e29; --text: #e8f4f8; --text-dim: #97b3c0;
+  --text-faint: #63808d; --accent: #38bdf8; --accent-bright: #7dd3fc;
+  --border: rgba(255,255,255,0.09); --radius: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
+.wrap { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+nav {
+  border-bottom: 1px solid var(--border); background: rgba(6,18,26,0.75);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; color: var(--text); }
+.brand img { width: 26px; height: 26px; border-radius: 6px; }
+.nav-link {
+  color: var(--text-dim); text-decoration: none; font-size: 0.9rem;
+  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border);
+}
+.nav-link:hover { color: var(--text); border-color: var(--accent); }
+main { padding: 56px 0 72px; }
+h1 { font-size: clamp(2rem, 5vw, 2.7rem); letter-spacing: -0.03em; margin-bottom: 10px; }
+.updated { color: var(--text-faint); font-size: 0.9rem; margin-bottom: 36px; }
+h2 { font-size: 1.25rem; letter-spacing: -0.02em; margin: 36px 0 12px; }
+p { color: var(--text-dim); margin-bottom: 14px; }
+ul { color: var(--text-dim); margin: 0 0 14px 22px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text); font-weight: 600; }
+a { color: var(--accent-bright); }
+.callout {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 22px 24px; margin: 28px 0;
+}
+.callout p:last-child { margin-bottom: 0; }
+footer { border-top: 1px solid var(--border); padding: 32px 0 48px; text-align: center; }
+footer p { color: var(--text-faint); font-size: 0.875rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; margin-bottom: 14px; }
+.footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+.footer-links a:hover { color: var(--accent-bright); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><img src="assets/icon.png" alt="">Ingest Air</a>
+    <a class="nav-link" href="index.html">← Back</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated 27 July 2026</p>
+
+  <div class="callout">
+    <p>
+      <strong>Ingest Air collects no data whatsoever.</strong> The app is built without
+      the network entitlement, which means macOS and iOS will not permit it to make a
+      network request of any kind. There is no server to send anything to, no account
+      to create, and no analytics of any sort.
+    </p>
+  </div>
+
+  <h2>Information we collect</h2>
+  <p>
+    None. We do not collect, store, transmit, sell, or share any personal information.
+    We have no way to do so: the app has no network access, and there is no backend
+    service behind it.
+  </p>
+
+  <h2>Your documents</h2>
+  <p>
+    The documents you open stay on your device. Specifically:
+  </p>
+  <ul>
+    <li>
+      You choose a file through the system file picker. Ingest Air can only read files
+      you explicitly select — it has no general access to your storage.
+    </li>
+    <li>
+      The extracted text, the generated summary, and any questions and answers are
+      stored in the app's private container on your device.
+    </li>
+    <li>
+      The app keeps a reference to the original file so it can resume interrupted work.
+      It never copies, moves, modifies, or deletes your original files.
+    </li>
+    <li>
+      Deleting a document from your library removes the app's stored copy of the text
+      and summary. Your original file is untouched.
+    </li>
+    <li>
+      Deleting the app removes everything it stored.
+    </li>
+  </ul>
+
+  <h2>How summaries are generated</h2>
+  <p>
+    Summaries and answers are produced by <strong>Apple Intelligence</strong>, Apple's
+    on-device foundation model, running locally on your hardware. Your document text is
+    passed to that on-device model. It is not sent to us, and it is not sent to any
+    third party by this app.
+  </p>
+  <p>
+    Apple Intelligence is a feature of your operating system, and Apple's own privacy
+    terms govern it. Ingest Air uses only the on-device model and does not use Private
+    Cloud Compute or any other server-based processing.
+  </p>
+
+  <h2>Analytics, advertising and tracking</h2>
+  <p>
+    There are none. Ingest Air contains no analytics SDK, no advertising, no crash
+    reporting service, and no tracking of any kind. It does not use cookies, device
+    identifiers, or the Advertising Identifier, and it does not track you across apps
+    or websites.
+  </p>
+
+  <h2>Third parties</h2>
+  <p>
+    Ingest Air includes one third-party open-source component, ZIPFoundation, used
+    locally to read EPUB files. It is a library compiled into the app, not a service:
+    it sends nothing anywhere. No other third party receives any data.
+  </p>
+
+  <h2>Children's privacy</h2>
+  <p>
+    Ingest Air does not collect personal information from anyone, including children
+    under 13. There is no sign-up, no profile, and no data collection to restrict.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    Regulations such as the GDPR and the CCPA give you rights to access, correct, and
+    delete personal data held about you. We hold none, so there is nothing for us to
+    disclose or erase. The data the app creates lives on your device and is entirely
+    under your control — you can delete any document from within the app, or remove
+    everything by deleting the app.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, the updated version will be posted on this page with a new
+    date. If a future version of the app ever collects anything at all, that change
+    will be described here before it ships.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this policy: <a href="mailto:support@ingestair.space">support@ingestair.space</a>
+  </p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="support.html">Support</a>
+      <a href="terms.html">Terms of Use</a>
+    </div>
+    <p>© 2026 Ingest Air</p>
+  </div>
+</footer>
+
+</body>
+</html>

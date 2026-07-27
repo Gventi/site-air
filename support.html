@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Ingest Air</title>
+<meta name="description" content="Help with Ingest Air: requirements, troubleshooting, and how to get in touch.">
+<link rel="icon" href="assets/icon.png">
+<link rel="canonical" href="https://ingestair.space/support.html">
+<style>
+:root {
+  --bg: #06121a; --bg-raised: #0d1e29; --text: #e8f4f8; --text-dim: #97b3c0;
+  --text-faint: #63808d; --accent: #38bdf8; --accent-bright: #7dd3fc;
+  --border: rgba(255,255,255,0.09); --radius: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
+.wrap { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+nav {
+  border-bottom: 1px solid var(--border); background: rgba(6,18,26,0.75);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; color: var(--text); }
+.brand img { width: 26px; height: 26px; border-radius: 6px; }
+.nav-link {
+  color: var(--text-dim); text-decoration: none; font-size: 0.9rem;
+  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border);
+}
+.nav-link:hover { color: var(--text); border-color: var(--accent); }
+main { padding: 56px 0 72px; }
+h1 { font-size: clamp(2rem, 5vw, 2.7rem); letter-spacing: -0.03em; margin-bottom: 10px; }
+.lede { color: var(--text-dim); font-size: 1.05rem; margin-bottom: 36px; }
+h2 { font-size: 1.25rem; letter-spacing: -0.02em; margin: 40px 0 14px; }
+p { color: var(--text-dim); margin-bottom: 14px; }
+ul { color: var(--text-dim); margin: 0 0 14px 22px; }
+li { margin-bottom: 8px; }
+strong { color: var(--text); font-weight: 600; }
+a { color: var(--accent-bright); }
+.contact {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 24px; margin: 28px 0 8px;
+}
+.contact p:last-child { margin-bottom: 0; }
+details {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; margin-bottom: 12px;
+}
+summary { cursor: pointer; font-weight: 600; color: var(--text); }
+details p { margin: 12px 0 0; }
+details ul { margin-top: 12px; }
+footer { border-top: 1px solid var(--border); padding: 32px 0 48px; text-align: center; }
+footer p { color: var(--text-faint); font-size: 0.875rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; margin-bottom: 14px; }
+.footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+.footer-links a:hover { color: var(--accent-bright); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><img src="assets/icon.png" alt="">Ingest Air</a>
+    <a class="nav-link" href="index.html">← Back</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <h1>Support</h1>
+  <p class="lede">
+    Ingest Air is a small app made by one person. If something isn't working, email me
+    and I'll actually read it.
+  </p>
+
+  <div class="contact">
+    <p><strong>Email:</strong> <a href="mailto:support@ingestair.space">support@ingestair.space</a></p>
+    <p>
+      It helps to include your device and OS version, the file format you were opening
+      (PDF, EPUB or MOBI), and what you saw on screen.
+    </p>
+  </div>
+
+  <h2>Common questions</h2>
+
+  <details>
+    <summary>The app says Apple Intelligence isn't available</summary>
+    <p>
+      Ingest Air uses Apple's on-device model, so it needs a device that supports
+      Apple&nbsp;Intelligence with the feature switched on. Check:
+    </p>
+    <ul>
+      <li><strong>Device:</strong> iPhone&nbsp;15&nbsp;Pro or later, an iPad with A17&nbsp;Pro or M-series, or a Mac with Apple silicon.</li>
+      <li><strong>OS:</strong> iOS/iPadOS&nbsp;26 or later, or macOS&nbsp;26 or later.</li>
+      <li><strong>Setting:</strong> Settings → Apple&nbsp;Intelligence &amp; Siri, and make sure it is on.</li>
+      <li><strong>Language:</strong> your device language must be one Apple&nbsp;Intelligence supports.</li>
+      <li><strong>Download:</strong> the first time you enable it, the system downloads the model. That can take a while, and Ingest Air will say the model isn't ready yet until it finishes.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Summarizing a long book is taking a while</summary>
+    <p>
+      Ingest Air reads the entire book rather than skimming it, so a long book takes
+      several minutes. Progress is shown section by section so you can see it moving.
+    </p>
+    <p>
+      You can leave the screen, and finished sections are saved as it goes — if you
+      quit part way through, reopening the document resumes rather than starting again.
+    </p>
+  </details>
+
+  <details>
+    <summary>A PDF failed with "no text" or asked to run text recognition</summary>
+    <p>
+      Some PDFs are images of pages rather than text — typically scans. Ingest Air will
+      offer to run text recognition on the document, which happens on your device. It
+      is slower than reading a normal PDF, roughly a second a page.
+    </p>
+    <p>
+      If recognition still finds nothing, the scan may be too low-contrast or too low
+      resolution to read.
+    </p>
+  </details>
+
+  <details>
+    <summary>A book failed to summarize</summary>
+    <p>
+      Try the <strong>Try Again</strong> button first. Any sections already finished are
+      reused, so a retry is usually quick.
+    </p>
+    <p>
+      Apple Intelligence occasionally declines to process particular passages. If a
+      specific book fails repeatedly, please email me the title — that's genuinely
+      useful and I can often fix it.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I use a different, larger model?</summary>
+    <p>
+      Not in Ingest Air — it uses Apple's on-device model only, which is what lets it
+      ship with no network access and no downloads.
+    </p>
+    <p>
+      Its sibling app, <a href="https://gventi.github.io/ingest/">Ingest for Mac</a>,
+      runs larger open-weight models locally instead. It is heavier and slower, but
+      stronger on long or difficult books.
+    </p>
+  </details>
+
+  <details>
+    <summary>How do I delete a document?</summary>
+    <p>
+      On iPhone and iPad, swipe left on it in the library. On Mac, right-click it and
+      choose Delete, or select it and press the Delete key. If several failed, the
+      trash button in the toolbar clears all of them at once.
+    </p>
+    <p>
+      This removes the app's stored summary and text. Your original file is never
+      touched.
+    </p>
+  </details>
+
+  <details>
+    <summary>Where is my data stored, and is any of it uploaded?</summary>
+    <p>
+      Everything stays in the app's private storage on your device. Nothing is
+      uploaded — Ingest Air ships without the network entitlement, so the operating
+      system will not allow it to make any network request at all. See the
+      <a href="privacy.html">privacy policy</a> for the full detail.
+    </p>
+  </details>
+
+  <details>
+    <summary>Which file formats are supported?</summary>
+    <p>
+      PDF, EPUB, and MOBI. Some newer Kindle files (KFX, and DRM-protected purchases)
+      cannot be opened by any third-party app and are not supported.
+    </p>
+  </details>
+
+  <h2>Reporting a bug</h2>
+  <p>
+    Email <a href="mailto:support@ingestair.space">support@ingestair.space</a> with what
+    you did, what you expected, and what happened instead. If it involves a specific
+    document, the title and format help a great deal. Please don't send the file itself
+    unless I ask — you own it, and I'd rather not have a copy.
+  </p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+    </div>
+    <p>© 2026 Ingest Air</p>
+  </div>
+</footer>
+
+</body>
+</html>

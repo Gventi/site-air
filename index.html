@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ingest Air — Summarize books on iPhone, iPad and Mac, privately</title>
+<meta name="description" content="Ingest Air turns PDFs, EPUBs and MOBI files into in-depth summaries and answers questions about them, using Apple Intelligence entirely on your device. It has no network access at all.">
+<link rel="icon" href="assets/icon.png">
+<link rel="canonical" href="https://ingestair.space/">
+
+<meta property="og:title" content="Ingest Air — Summarize books privately, on device">
+<meta property="og:description" content="In-depth summaries and grounded Q&A for your PDFs, EPUBs and MOBI files. Powered by Apple Intelligence. No network access at all.">
+<meta property="og:image" content="https://ingestair.space/assets/icon.png">
+<meta property="og:url" content="https://ingestair.space/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+/* ============================================================
+   APP STORE LINK
+   The app is not on the App Store yet. When it is:
+     1. Replace every href="#coming-soon" with the App Store product URL.
+     2. Swap the placeholder button for Apple's official black
+        "Download on the App Store" badge artwork, which Apple requires you
+        use unmodified. Download it from:
+        https://developer.apple.com/app-store/marketing/guidelines/
+     3. Delete the .coming-soon note in the hero.
+   Until then this page deliberately does NOT show Apple's badge, because
+   showing it for an app you cannot download would be misleading.
+   ============================================================ */
+
+:root {
+  --bg: #06121a;
+  --bg-raised: #0d1e29;
+  --text: #e8f4f8;
+  --text-dim: #97b3c0;
+  --text-faint: #63808d;
+  --accent: #38bdf8;
+  --accent-bright: #7dd3fc;
+  --deep: #0e4a6b;
+  --teal: #0ea5c9;
+  --border: rgba(255, 255, 255, 0.09);
+  --radius: 16px;
+  --max: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -30vh; left: 50%;
+  transform: translateX(-50%);
+  width: 120vw; height: 90vh;
+  background: radial-gradient(ellipse at center,
+    rgba(14, 165, 201, 0.20) 0%,
+    rgba(14, 74, 107, 0.12) 40%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ---------- Nav ---------- */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(6, 18, 26, 0.75);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 58px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; }
+.brand img { width: 26px; height: 26px; border-radius: 6px; }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-link {
+  color: var(--text-dim); text-decoration: none; font-size: 0.9rem;
+  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-link:hover { color: var(--text); border-color: var(--accent); background: rgba(56, 189, 248, 0.1); }
+
+/* ---------- Hero ---------- */
+header { padding: 88px 0 72px; text-align: center; }
+.app-icon {
+  width: 132px; height: 132px; border-radius: 30px;
+  margin-bottom: 28px;
+  filter: drop-shadow(0 18px 44px rgba(14, 165, 201, 0.4));
+}
+h1 {
+  font-size: clamp(2.5rem, 6.5vw, 4rem);
+  line-height: 1.05; letter-spacing: -0.035em; font-weight: 700;
+  margin-bottom: 20px;
+}
+.tagline {
+  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  color: var(--text-dim); max-width: 640px; margin: 0 auto 14px;
+  text-wrap: balance;
+}
+.tagline strong { color: var(--text); font-weight: 600; }
+
+.cta-group { margin-top: 34px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.store-btn {
+  display: inline-flex; align-items: center; gap: 11px;
+  background: linear-gradient(135deg, var(--deep), var(--accent));
+  color: #fff; text-decoration: none; font-weight: 600; font-size: 1.05rem;
+  padding: 15px 34px; border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(14, 165, 201, 0.38);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.store-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(14, 165, 201, 0.5); }
+.store-btn svg { width: 20px; height: 20px; fill: currentColor; }
+.req { color: var(--text-faint); font-size: 0.875rem; max-width: 460px; text-wrap: balance; }
+.coming-soon {
+  display: inline-block; margin-top: 4px;
+  font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--accent-bright); border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(56, 189, 248, 0.08);
+  padding: 4px 12px; border-radius: 999px;
+}
+
+.shot {
+  width: 100%; max-width: 940px; margin: 56px auto 0; display: block;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Privacy callout ---------- */
+.privacy {
+  margin: 64px auto 0; max-width: 760px; text-align: left;
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 30px 32px;
+}
+.privacy h2 {
+  display: flex; align-items: center; gap: 11px;
+  font-size: 1.2rem; letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.privacy h2 svg { width: 22px; height: 22px; fill: var(--accent); flex-shrink: 0; }
+.privacy p { color: var(--text-dim); font-size: 0.98rem; }
+.privacy p + p { margin-top: 12px; }
+
+/* ---------- Sections ---------- */
+section { padding: 72px 0; }
+.section-head { text-align: center; margin-bottom: 44px; }
+.section-title { font-size: clamp(1.7rem, 4vw, 2.4rem); letter-spacing: -0.03em; margin-bottom: 12px; }
+.section-sub { color: var(--text-dim); max-width: 620px; margin: 0 auto; text-wrap: balance; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 26px;
+}
+.card .ico {
+  width: 42px; height: 42px; border-radius: 11px; margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--deep), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+}
+.card .ico svg { width: 21px; height: 21px; fill: #fff; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; letter-spacing: -0.015em; }
+.card p { color: var(--text-dim); font-size: 0.94rem; }
+
+/* ---------- Steps ---------- */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; counter-reset: step; }
+.step { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-raised); }
+.step::before {
+  counter-increment: step; content: counter(step);
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%; margin-bottom: 14px;
+  background: linear-gradient(135deg, var(--deep), var(--teal));
+  font-weight: 700; font-size: 0.9rem; color: #fff;
+}
+.step h3 { font-size: 1rem; margin-bottom: 6px; }
+.step p { color: var(--text-dim); font-size: 0.92rem; }
+
+/* ---------- Requirements table ---------- */
+.reqs { max-width: 760px; margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.reqs-row { display: flex; gap: 18px; padding: 16px 22px; border-bottom: 1px solid var(--border); background: var(--bg-raised); }
+.reqs-row:last-child { border-bottom: none; }
+.reqs-key { flex: 0 0 130px; font-weight: 600; font-size: 0.94rem; }
+.reqs-val { color: var(--text-dim); font-size: 0.94rem; }
+
+/* ---------- Sibling ---------- */
+.sibling {
+  max-width: 760px; margin: 0 auto; text-align: center;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-raised); padding: 30px 32px;
+}
+.sibling h2 { font-size: 1.25rem; margin-bottom: 10px; letter-spacing: -0.02em; }
+.sibling p { color: var(--text-dim); font-size: 0.96rem; margin-bottom: 18px; }
+.sibling a { color: var(--accent-bright); }
+
+/* ---------- Footer ---------- */
+footer { border-top: 1px solid var(--border); padding: 40px 0 56px; text-align: center; }
+footer p { color: var(--text-faint); font-size: 0.875rem; }
+footer nav { position: static; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; margin-bottom: 14px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
+.footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+.footer-links a:hover { color: var(--accent-bright); }
+
+/* ---------- Reveal ---------- */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .store-btn { transition: none; }
+}
+
+@media (max-width: 600px) {
+  header { padding: 56px 0 48px; }
+  .app-icon { width: 104px; height: 104px; }
+  .privacy, .sibling { padding: 24px 20px; }
+  .reqs-row { flex-direction: column; gap: 4px; }
+  .reqs-key { flex: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="brand"><img src="assets/icon.png" alt="">Ingest Air</div>
+    <div class="nav-links">
+      <a class="nav-link" href="support.html">Support</a>
+      <a class="nav-link" href="privacy.html">Privacy</a>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap">
+  <img class="app-icon" src="assets/icon.png" alt="Ingest Air app icon">
+  <h1>Read the whole book.<br>On any device you own.</h1>
+  <p class="tagline">
+    Ingest Air turns a PDF, EPUB or MOBI into a genuinely in-depth summary —
+    chapter by chapter — then lets you ask it questions.
+    <strong>Powered by Apple Intelligence, entirely on your device.</strong>
+  </p>
+
+  <div class="cta-group">
+    <a class="store-btn" href="#coming-soon">
+      <svg viewBox="0 0 24 24"><path d="M17.05 12.54c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.55.02-2.98.9-3.77 2.28-1.61 2.79-.41 6.92 1.15 9.19.76 1.11 1.67 2.36 2.87 2.31 1.15-.05 1.59-.74 2.98-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.13 2.78-2.24.88-1.29 1.24-2.54 1.26-2.6-.03-.01-2.41-.93-2.43-3.7zM14.9 5.5c.63-.78 1.06-1.85.94-2.93-.91.04-2.02.61-2.68 1.37-.59.68-1.11 1.78-.97 2.83 1.02.08 2.07-.52 2.71-1.27z"/></svg>
+      Download on the App Store
+    </a>
+    <span class="coming-soon">Coming soon</span>
+    <p class="req">
+      Requires a device that supports Apple&nbsp;Intelligence, with it turned on.
+      iOS&nbsp;26 or later, or macOS&nbsp;26 or later.
+    </p>
+  </div>
+
+  <!-- To refresh: ⌘⇧4 then Space, click the Ingest Air window, save as assets/screenshot.png -->
+  <img class="shot reveal" src="assets/screenshot.png"
+       alt="Ingest Air showing a chapter-by-chapter summary of Man's Search for Meaning, with a synopsis and themes">
+
+  <div class="privacy reveal">
+    <h2>
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+      Your books never leave your device
+    </h2>
+    <p>
+      Every summary and every answer is produced by Apple Intelligence running on your
+      own hardware. There is no account, no server, and no analytics.
+    </p>
+    <p>
+      Ingest Air is built without the network entitlement, so the app is not
+      permitted to make a network request of any kind — not for your documents, not
+      for telemetry, not for anything. Nothing is uploaded and nothing is downloaded,
+      and that is enforced by the operating system rather than promised by us.
+    </p>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="section-head reveal">
+    <h2 class="section-title">Not a three-sentence blurb</h2>
+    <p class="section-sub">
+      Ingest Air reads a book in chapter-sized pieces, then builds a structured
+      summary you can actually navigate.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 6H2v14a2 2 0 002 2h14v-2H4V6zm16-4H8a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg></div>
+      <h3>Chapter-by-chapter depth</h3>
+      <p>A full synopsis, per-chapter breakdowns, recurring themes, key takeaways and notable quotes — not a paragraph that could have been guessed from the cover.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg></div>
+      <h3>Ask the book</h3>
+      <p>Ask anything and get an answer grounded in the actual text, with the chapters it drew from shown beneath — so you can check it rather than trust it.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <h3>Search everything you've read</h3>
+      <p>One search box across your whole library, matching against the summaries and showing you the chapter each result came from.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 3a3 3 0 110 6 3 3 0 010-6zm6 12H6v-1c0-2 4-3.1 6-3.1S18 15 18 17v1z"/></svg></div>
+      <h3>Scanned pages too</h3>
+      <p>If a PDF is a scan with no text layer, Ingest Air offers to run text recognition on it first, so old books and papers still work.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 00-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 117 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.95 8.95 0 0013 21a9 9 0 000-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></div>
+      <h3>Picks up where it stopped</h3>
+      <p>Finished sections are saved as it goes. Close the app mid-way through a long book and it resumes rather than starting over.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="ico"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 100-6 3 3 0 00-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 100 6c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65a2.92 2.92 0 105.84 0c0-1.61-1.31-2.92-2.92-2.92z"/></svg></div>
+      <h3>Share a summary anywhere</h3>
+      <p>Send a finished summary through the standard share sheet — Notes, Mail, Messages, or anywhere else you keep your reading.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head reveal">
+    <h2 class="section-title">How it works</h2>
+    <p class="section-sub">Three steps, then it gets out of your way.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <h3>Add a book</h3>
+      <p>Pick a PDF, EPUB or MOBI file. Ingest Air reads its chapter structure rather than treating it as one wall of text.</p>
+    </div>
+    <div class="step reveal">
+      <h3>It reads the whole thing</h3>
+      <p>Each section is summarized in turn, then combined into one coherent synopsis. Progress is shown honestly, section by section.</p>
+    </div>
+    <div class="step reveal">
+      <h3>Read, search, or ask</h3>
+      <p>Browse the summary, search your library, or switch to Ask and question the book directly.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head reveal">
+    <h2 class="section-title">What you'll need</h2>
+    <p class="section-sub">
+      Ingest Air uses Apple's own on-device model, so it runs wherever
+      Apple&nbsp;Intelligence does.
+    </p>
+  </div>
+  <div class="reqs reveal">
+    <div class="reqs-row">
+      <div class="reqs-key">iPhone</div>
+      <div class="reqs-val">iPhone&nbsp;15&nbsp;Pro, iPhone&nbsp;15&nbsp;Pro&nbsp;Max, or any iPhone&nbsp;16 or later, running iOS&nbsp;26 or later.</div>
+    </div>
+    <div class="reqs-row">
+      <div class="reqs-key">iPad</div>
+      <div class="reqs-val">Any iPad with an A17&nbsp;Pro or M-series chip, running iPadOS&nbsp;26 or later.</div>
+    </div>
+    <div class="reqs-row">
+      <div class="reqs-key">Mac</div>
+      <div class="reqs-val">Any Mac with Apple silicon, running macOS&nbsp;26 or later.</div>
+    </div>
+    <div class="reqs-row">
+      <div class="reqs-key">Also</div>
+      <div class="reqs-val">Apple&nbsp;Intelligence must be turned on in Settings, and your device language must be one it supports. Ingest Air tells you plainly if it isn't available rather than failing silently.</div>
+    </div>
+    <div class="reqs-row">
+      <div class="reqs-key">Formats</div>
+      <div class="reqs-val">PDF, EPUB, and MOBI. Scanned PDFs are supported through on-device text recognition.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sibling reveal">
+    <h2>Want a bigger model?</h2>
+    <p>
+      <strong>Ingest</strong> is the sibling app for Mac. It runs larger open-weight
+      language models locally — slower and heavier, but more capable on long or
+      difficult books. It is a separate download, not on the App Store.
+    </p>
+    <a href="https://gventi.github.io/ingest/">Take a look at Ingest for Mac →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="support.html">Support</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="https://gventi.github.io/ingest/">Ingest for Mac</a>
+      </div>
+    </nav>
+    <p>Ingest Air is not affiliated with Apple Inc. Apple, Apple Intelligence, iPhone, iPad, Mac and App Store are trademarks of Apple Inc.</p>
+    <p style="margin-top:8px">© 2026 Ingest Air</p>
+  </div>
+</footer>
+
+<script>
+// Progressive enhancement only — everything is visible without JS via the
+// prefers-reduced-motion rule and this fallback.
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -60px 0px' });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
